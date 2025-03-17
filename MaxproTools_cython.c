@@ -8,7 +8,7 @@
             "/openmp"
         ],
         "include_dirs": [
-            "C:\\Users\\vorec\\anaconda3\\envs\\tensor\\Lib\\site-packages\\numpy\\core\\include"
+            "c:\\Users\\vorec\\anaconda3\\envs\\tensor\\Lib\\site-packages\\numpy\\core\\include"
         ],
         "name": "MaxproTools_cython",
         "sources": [
