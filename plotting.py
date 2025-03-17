@@ -36,8 +36,10 @@ def setup_latex():
     plt.rc('text.latex', preamble=preamble)
     plt.rcParams["pgf.preamble"] = preamble
 
+import os
+from IPython.display import display, FileLink
 
-def plot_progress(ax, ntrials, nrecalc, maxpro_hist, maxpro_opt_hist, T_hist):
+def plot_progress(ax, ntrials, nrecalc, maxpro_hist, maxpro_opt_hist, T_hist, dir_name=None):
     x_trials = np.linspace(1, ntrials + nrecalc, ntrials + nrecalc)
 
     l1, = ax.semilogy(x_trials[:ntrials], maxpro_hist[:ntrials], 'k-', label='Criterion history')
@@ -52,14 +54,19 @@ def plot_progress(ax, ntrials, nrecalc, maxpro_hist, maxpro_opt_hist, T_hist):
     lines = [l1, l2, l3, l4]
     labels = [line.get_label() for line in lines]
     ax.legend(lines, labels, loc='best')
-    
+
     ax.set_title('Progress of Simulated Annealing combinatorial optimization')
-    
-    SAfilename = os.path.join('SimulatedAnnealingProgress.pdf')
+
+    # Conditional handling for dir_name
+    if dir_name is None:
+        SAfilename = 'SimulatedAnnealingProgress.pdf'
+    else:
+        SAfilename = os.path.join(dir_name, 'SimulatedAnnealingProgress.pdf')
+
     plt.savefig(SAfilename, dpi=300)
     display(FileLink(SAfilename))
 
-    
+
 def plot_2D_view(nv, ns, x, ax, vars_to_plot=[0, 1], des_no=None):
     ax.set_xlim(-1, 2)
     ax.set_ylim(-1, 2)
@@ -90,11 +97,11 @@ def plot_2D_view(nv, ns, x, ax, vars_to_plot=[0, 1], des_no=None):
     # Set the conditional title
     title = f"Design {des_no} view of variables {vars_to_plot}" if des_no is not None else f"Design view of variables {vars_to_plot}"
     ax.set_title(title)
-    
+
     plt.show()
 
 
-def plot_2D_view_comparison(nv, ns, x_ini, x_opt, vars_to_plot=[0, 1]):
+def plot_2D_view_comparison(nv, ns, x_ini, x_opt, vars_to_plot=[0, 1], dir_name=None):
     fig, axs = plt.subplots(1, 2, figsize=(12, 6))
     plt.subplots_adjust(wspace=0.1)  # spacing between plots
 
@@ -135,10 +142,15 @@ def plot_2D_view_comparison(nv, ns, x_ini, x_opt, vars_to_plot=[0, 1]):
         ax.scatter(0 * x[:, u] - 1, x[:, v], s=50, marker="_", color='k')
 
 
-    design_comparison = '2D_view_comparison.pdf'
-    plt.savefig(design_comparison, dpi=300)
-    display(FileLink(design_comparison))
-    
+    # Conditional handling for dir_name
+    if dir_name is None:
+        design_comparison_filename = '2D_view_comparison.pdf'
+    else:
+        design_comparison_filename = os.path.join(dir_name, '2D_view_comparison.pdf')
+
+    plt.savefig(design_comparison_filename, dpi=300)
+    display(FileLink(design_comparison_filename))
+
     plt.show()
 
 
