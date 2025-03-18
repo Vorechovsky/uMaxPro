@@ -28,8 +28,8 @@ __pycache__/                  # Compiled Python files
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/MaxPro-Design-Generator.git
-   cd MaxPro-Design-Generator
+   git clone https://github.com/Vorechovsky/uMaxPro
+   cd uMaxPro
    ```
 
 2. Build the Cython module:
